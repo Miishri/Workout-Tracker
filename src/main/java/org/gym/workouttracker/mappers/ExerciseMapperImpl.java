@@ -4,6 +4,9 @@ import org.gym.workouttracker.entities.Exercise;
 import org.gym.workouttracker.models.ExerciseDTO;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 public class ExerciseMapperImpl implements ExerciseMapper {
     @Override
@@ -25,5 +28,13 @@ public class ExerciseMapperImpl implements ExerciseMapper {
                 .exerciseDetails(exercise.getExerciseDetails())
                 .recentExerciseSets(exercise.getRecentExerciseSets())
                 .exerciseCreationDate(exercise.getExerciseCreationDate()).build();
+    }
+
+    @Override
+    public List<ExerciseDTO> ExerciseListToExerciseDtoList(List<Exercise> exerciseList) {
+        return exerciseList
+                .stream()
+                .map(this::ExerciseToExerciseDto)
+                .collect(Collectors.toList());
     }
 }
