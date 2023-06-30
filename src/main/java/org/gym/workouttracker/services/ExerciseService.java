@@ -1,6 +1,6 @@
-package org.gym.workouttracker.service;
+package org.gym.workouttracker.services;
 
-import org.gym.workouttracker.entity.Exercise;
+import org.gym.workouttracker.entities.Exercise;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
