@@ -1,9 +1,6 @@
 package org.gym.workouttracker.entities;
 
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
@@ -31,15 +28,12 @@ public class Exercise {
     private UUID id;
 
     @Column(name = "exercise_name", nullable = false, length = 100)
-    @NotBlank(message = "Exercise name is required")
     private String exerciseName;
 
     @Column(name = "exercise_details", nullable = false, length = 150)
-    @Size(max = 150)
     private String exerciseDetails;
 
     @Column(name = "recent_exercise_sets")
-    @Max(20)
     private Integer recentExerciseSets;
 
     @CreationTimestamp
