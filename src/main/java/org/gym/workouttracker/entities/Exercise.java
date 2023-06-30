@@ -20,11 +20,11 @@ import java.util.UUID;
 @Table(name = "Exercises")
 public class Exercise {
 
+    @Id
     @GeneratedValue(generator = "UUID")
     @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @JdbcTypeCode(SqlTypes.CHAR)
-    @Id
-    @Column(name = "exercise_id", nullable = false, updatable = false, columnDefinition = "char(36)")
+    @Column(name = "exercise_id", length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
     private UUID id;
 
     @Column(name = "exercise_name", nullable = false, length = 100)
