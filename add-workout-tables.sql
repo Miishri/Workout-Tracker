@@ -1,0 +1,1 @@
+create table exercises (recent_exercise_sets integer check (recent_exercise_sets<=20), exercise_created datetime(6), exercise_id char(36) not null, exercise_name varchar(100) not null, exercise_details varchar(150) not null, primary key (exercise_id)) engine=InnoDB;
