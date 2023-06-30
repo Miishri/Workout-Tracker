@@ -43,5 +43,6 @@ public class Exercise {
     private Integer recentExerciseSets;
 
     @CreationTimestamp
+    @Column(name = "exercise_created")
     private LocalDateTime exerciseCreationDate;
 }
