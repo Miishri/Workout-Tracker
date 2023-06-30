@@ -1,7 +1,7 @@
 
 
 CREATE TABLE exercises (
-    exercise_id 			char(36) 		 NOT NULL,
+    exercise_id 			varchar(36)      NOT NULL,
     exercise_name 			varchar(100) 	 NOT NULL,
     exercise_details 		varchar(150)	 NOT NULL,
     recent_exercise_sets	int 			 DEFAULT 0,
