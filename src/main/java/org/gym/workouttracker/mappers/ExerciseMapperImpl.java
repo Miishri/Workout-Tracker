@@ -2,7 +2,9 @@ package org.gym.workouttracker.mappers;
 
 import org.gym.workouttracker.entities.Exercise;
 import org.gym.workouttracker.models.ExerciseDTO;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ExerciseMapperImpl implements ExerciseMapper {
     @Override
     public Exercise ExerciseDtoToExercise(ExerciseDTO exerciseDTO) {
