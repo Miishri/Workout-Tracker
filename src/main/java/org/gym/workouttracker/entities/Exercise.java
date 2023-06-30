@@ -38,7 +38,7 @@ public class Exercise {
     @Size(max = 150)
     private String exerciseDetails;
 
-    @Column(name = "recent_sets")
+    @Column(name = "recent_exercise_sets")
     @Max(20)
     private Integer recentExerciseSets;
 
