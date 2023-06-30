@@ -9,6 +9,7 @@ import org.gym.workouttracker.repositories.ExerciseRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -83,7 +84,8 @@ public class ExerciseServiceImpl implements ExerciseService {
                 .exerciseName(exercise.getExerciseName())
                 .exerciseDetails(exercise.getExerciseDetails())
                 .recentExerciseSets(exercise.getRecentExerciseSets())
-                .exerciseCreationDate(exercise.getExerciseCreationDate()).build();
+                .exerciseCreationDate(LocalDateTime.now())
+                .build();
     }
 
     @Override
