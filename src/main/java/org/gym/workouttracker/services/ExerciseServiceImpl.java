@@ -56,27 +56,26 @@ public class ExerciseServiceImpl implements ExerciseService {
     }
 
     @Override
-    public Optional<ExerciseDTO> getExerciseById(UUID id) {
-        Optional<Exercise> exerciseOptional = exerciseRepository.findById(id);
-        if (exerciseOptional.isEmpty()) {
-            throw new ExerciseNotFoundException();
+    public ExerciseDTO getExerciseById(UUID id) {
+        if (!exerciseRepository.existsById(id)) {
+            throw new ExerciseNotFoundException("Workout with the ID:" + id + " was not found");
         }
         log.debug("SERVICE--Get exercise by id--SERVICE");
-        return Optional.of(exerciseMapper.ExerciseToExerciseDto(exerciseOptional.get()));
+        return exerciseMapper.ExerciseToExerciseDto(exerciseRepository.findById(id).get());
     }
 
     @Override
-    public Optional<ExerciseDTO> updateExercise(UUID id, ExerciseDTO userExercise) {
+    public ExerciseDTO updateExercise(UUID id, ExerciseDTO userExercise) {
 
         Optional<Exercise> exerciseOptional = exerciseRepository.findById(id);
 
-        if (exerciseOptional.isPresent()) {
-            Exercise exercise = updateExerciseVariables(exerciseOptional.get());
-            exerciseRepository.save(exercise);
-            return Optional.of(exerciseMapper.ExerciseToExerciseDto(exercise));
+        if (exerciseOptional.isEmpty()) {
+            throw new ExerciseNotFoundException("Exercise doesn't exist with the ID: " + id);
         }
 
-        return Optional.empty();
+        Exercise exercise = updateExerciseVariables(exerciseOptional.get());
+        exerciseRepository.save(exercise);
+        return exerciseMapper.ExerciseToExerciseDto(exercise);
     }
     private Exercise updateExerciseVariables(Exercise exercise) {
         return Exercise.builder()
@@ -84,19 +83,19 @@ public class ExerciseServiceImpl implements ExerciseService {
                 .exerciseName(exercise.getExerciseName())
                 .exerciseDetails(exercise.getExerciseDetails())
                 .recentExerciseSets(exercise.getRecentExerciseSets())
+                .exercisePersonalRecord(exercise.getExercisePersonalRecord())
                 .exerciseCreationDate(LocalDateTime.now())
                 .build();
     }
 
     @Override
-    public Optional<ExerciseDTO> deleteExercise(UUID id) {
-        if (exerciseRepository.findById(id).isPresent()) {
-            Exercise deletedExercise = exerciseRepository.findById(id).get();
-            exerciseRepository.deleteById(id);
-            log.debug("--Delete exercise by id--");
-            return Optional.of(exerciseMapper.ExerciseToExerciseDto(deletedExercise));
+    public ExerciseDTO deleteExerciseById(UUID id) {
+        if (!exerciseRepository.existsById(id)) {
+            throw new ExerciseNotFoundException("Exercise not found with ID:" + id);
         }
-
-        return Optional.empty();
+        Exercise deletedExercise = exerciseRepository.findById(id).get();
+        exerciseRepository.deleteById(id);
+        log.debug("--Delete exercise by id--");
+        return exerciseMapper.ExerciseToExerciseDto(deletedExercise);
     }
 }
