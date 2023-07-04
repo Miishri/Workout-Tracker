@@ -7,6 +7,7 @@ import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
 import org.hibernate.type.SqlTypes;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -36,7 +37,12 @@ public class Exercise {
     @Column(name = "recent_exercise_sets")
     private Integer recentExerciseSets;
 
+    @Column(name = "personal_record")
+    private BigDecimal exercisePersonalRecord;
+
     @CreationTimestamp
     @Column(name = "exercise_created")
     private LocalDateTime exerciseCreationDate;
+
+
 }

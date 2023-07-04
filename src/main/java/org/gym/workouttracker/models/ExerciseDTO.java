@@ -7,6 +7,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Builder;
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -20,5 +21,6 @@ public class ExerciseDTO {
     private String exerciseDetails;
     @Max(20)
     private Integer recentExerciseSets;
+    private BigDecimal exercisePersonalRecord;
     private LocalDateTime exerciseCreationDate;
 }
